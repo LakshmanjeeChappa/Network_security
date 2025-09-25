@@ -18,7 +18,7 @@ My note:
 when i ran the above command this shows how my VM is connected. The important one is `ens33` with 192.168.92.128, which is my VM’s address. 
 
 
-https://github.com/user-attachments/assets/5928d6bc-afe9-4111-8ab3-d622d76eb701
+![1st command](https://github.com/user-attachments/assets/5928d6bc-afe9-4111-8ab3-d622d76eb701)
 
 2) Check Open Ports
 
@@ -37,7 +37,7 @@ My note:
  SSH being open makes sense but I’ll want to lock it down. CUPS is just for printing — not useful here, so that’s extra stuff I don’t need running. Everything else looked normal.
 
 
-https://github.com/user-attachments/assets/6a1c5615-f168-4a24-b282-d6800f0562f0
+![2nd command](https://github.com/user-attachments/assets/6a1c5615-f168-4a24-b282-d6800f0562f0)
 
  3) List Connections with lsof
 
@@ -47,7 +47,7 @@ sudo lsof -i -P -n
 What i saw :
 My first run failed (wrong flags). After correcting it, I could see which processes are tied to ports.
 
-https://github.com/user-attachments/assets/ad91c203-3fa7-46e0-96c9-44bc48fa6bba
+![3rd command](https://github.com/user-attachments/assets/ad91c203-3fa7-46e0-96c9-44bc48fa6bba)
 
  4) Nmap Scan (Localhost)
 
@@ -62,7 +62,7 @@ My note:
 
 Nmap results matched what I saw with ss. The OS guess was low confidence, but that’s fine.
 
-https://github.com/user-attachments/assets/f4b6b64a-3133-41d7-8ad0-5727ea1aa3db
+![4th command](https://github.com/user-attachments/assets/f4b6b64a-3133-41d7-8ad0-5727ea1aa3db)
 
  5) Find Devices on My Network
 
@@ -79,9 +79,9 @@ My note:
 
 Found my router, my VM, and other devices like phones or smart plugs. A reminder that home networks always have more stuff than you expect.
 
-https://github.com/user-attachments/assets/f3dfcabc-ad9f-423a-9c5c-cd8b94486b49
+![5th command](https://github.com/user-attachments/assets/f3dfcabc-ad9f-423a-9c5c-cd8b94486b49)
 
-https://github.com/user-attachments/assets/d927336e-cbf8-416a-90f2-fd6394ecbc17
+![5.1 command](https://github.com/user-attachments/assets/d927336e-cbf8-416a-90f2-fd6394ecbc17)
 
  6) Check Services and Versions
 
@@ -99,7 +99,7 @@ My note:
 SSH version was up-to-date. The printing service (CUPS) surprised me — no reason for it on this VM.
 
 
-https://github.com/user-attachments/assets/d23f2d6f-7a89-4a82-9f0b-128531ce86d8
+![6th command](https://github.com/user-attachments/assets/d23f2d6f-7a89-4a82-9f0b-128531ce86d8)
 
 7) Quick Vulnerability Check
 
@@ -118,9 +118,9 @@ My note:
 
 Nothing serious flagged, just generic stuff. Shows how vuln scans can be messy.
 
-https://github.com/user-attachments/assets/51934f90-556d-466a-840a-09039ce7dedd
+![7th command](https://github.com/user-attachments/assets/51934f90-556d-466a-840a-09039ce7dedd)
 
-https://github.com/user-attachments/assets/050c271c-1de1-4fc9-8d9b-276d6c3741ee
+![7.1th command](https://github.com/user-attachments/assets/050c271c-1de1-4fc9-8d9b-276d6c3741ee)
 
  8) Watch Network Traffic
 
@@ -137,8 +137,8 @@ My note:
 
 Looked like normal traffic — my VM chatting with the router. No weird protocols or surprises.
 
-https://github.com/user-attachments/assets/6d05c0b2-1fba-4bb5-9202-7722ba548216
-https://github.com/user-attachments/assets/3c5e1d16-4356-49f8-9c0a-bca49293236c
+![8th command](https://github.com/user-attachments/assets/6d05c0b2-1fba-4bb5-9202-7722ba548216)
+![8.1 command](https://github.com/user-attachments/assets/3c5e1d16-4356-49f8-9c0a-bca49293236c)
 
  9) Real-Time Connections
 
@@ -157,7 +157,7 @@ My note:
 
  I liked seeing this update live. Nothing unexpected popped up, so it gave me some peace of mind. Again, SSH is the one to keep an eye on.
 
-https://github.com/user-attachments/assets/3a072c90-c22e-4b56-a94a-cd6267fd85fc
+![9th command](https://github.com/user-attachments/assets/3a072c90-c22e-4b56-a94a-cd6267fd85fc)
 
 10) Firewall Rules
 
@@ -178,7 +178,7 @@ This was good to see — my VM isn’t wide open. SSH is allowed, which I expect
 
 
 
-https://github.com/user-attachments/assets/35bfb693-41a6-441a-8b61-3f7ed60356fe
+![10th command](https://github.com/user-attachments/assets/35bfb693-41a6-441a-8b61-3f7ed60356fe)
 
 
 

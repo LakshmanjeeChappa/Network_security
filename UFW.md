@@ -35,6 +35,13 @@ My note:
 
 SSH was already allowed, so UFW skipped adding duplicates. This is important to make sure I don’t lock myself out when enabling UFW.
 
+
+If you are remotely accessing your server, why is it important to allow traffic through port 22 before enabling UFW?
+
+Answer:
+
+Port 22 is used by SSH, which is how we connect remotely to the server. If we enable the firewall without first allowing port 22, it would block our SSH connection and lock us out of the machine. Allowing it first ensures we can still log in and manage the server after UFW is enabled.
+
 ![](image-2.png)
 
 
@@ -249,6 +256,14 @@ My note:
 That makes sense — nothing tried to connect on blocked ports yet.
 
 ![alt text](7.png)
+
+
+
+Is there any output for DENY? Why or why not?
+
+Answer:
+
+In my case, there was no DENY output. That’s because most of the traffic going in and out of my VM was normal and matched the firewall rules (like DNS lookups, SSH, or multicast). Since nothing was blocked, UFW didn’t log any DENY entries. If a suspicious or disallowed IP tried to connect, then we would see DENY logs.
 
 5) Check for allowed traffic
 Command:

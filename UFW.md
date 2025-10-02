@@ -7,6 +7,8 @@ This is about enabling and configuring UFW (Uncomplicated Firewall) on my Ubuntu
 Part I: Enable UFW
 1) Check UFW status
 sudo ufw status
+
+
 What I saw:
 Status was active at first.But something went wrong with my VM . i have downloaded it again and started doing it from first and then the status was inactive
 
@@ -20,8 +22,9 @@ UFW wasn’t running by default, so I had to enable it.
 2) Allow SSH before enabling
 Command:
 
-
 sudo ufw allow 22/tcp
+
+
 What I saw:
 Output:
 Skipping adding existing rule
@@ -35,6 +38,8 @@ SSH was already allowed, so UFW skipped adding duplicates. This is important to 
 3) Check open ports
 Command:
 sudo ss -tuln
+
+
 What I saw:
 Services like DNS (53), DHCP (68), Avahi/MDNS (5353), and CUPS (631) were listening.
 
@@ -49,6 +54,8 @@ Command:
 
 
 sudo ufw enable
+
+
 What I saw:
 Message: Firewall is active and enabled on system startup
 
@@ -62,6 +69,8 @@ Command:
 
 
 sudo ufw status
+
+
 What I saw:
 Status changed to active.
 
@@ -76,6 +85,8 @@ Command:
 
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
+
+
 What I saw:
 Rules were added for HTTP (80) and HTTPS (443).
 
@@ -91,6 +102,8 @@ Command:
 
 
 sudo ufw status verbose
+
+
 What I saw:
 
 Default policy: deny incoming, allow outgoing
@@ -109,6 +122,8 @@ Command:
 
 
 sudo ufw deny from 10.0.0.0
+
+
 What I saw:
 Rule added to deny traffic from that IP.
 
@@ -122,6 +137,8 @@ Command:
 
 
 sudo ufw allow from 192.168.1.50 to any port 587
+
+
 What I saw:
 Rule added to allow that host.
 
@@ -135,6 +152,8 @@ Command:
 
 
 sudo ufw status
+
+
 What I saw:
 Rules listed for SSH (22), HTTP (80), HTTPS (443), deny 10.0.0.0, and allow 192.168.1.50 on port 587.
 
@@ -149,6 +168,8 @@ Command:
 
 
 sudo ufw logging on
+
+
 What I saw:
 Logging was enabled.
 
@@ -162,6 +183,8 @@ Command:
 
 
 sudo ufw logging high
+
+
 What I saw:
 Logging set to high.
 
@@ -174,6 +197,8 @@ Command:
 
 
 sudo tail -n 20 /var/log/ufw.log
+
+
 What I saw:
 Mostly [UFW AUDIT] and [UFW ALLOW] entries for DNS (53) and Avahi (5353).
 
@@ -187,6 +212,8 @@ Command:
 
 
 sudo grep 'DENY' /var/log/ufw.log | tail -n 10
+
+
 What I saw:
 No DENY results.
 
@@ -199,6 +226,8 @@ Command:
 
 
 sudo grep 'ALLOW' /var/log/ufw.log | tail -n 10
+
+
 What I saw:
 Several [UFW ALLOW] entries for DNS and multicast traffic.
 

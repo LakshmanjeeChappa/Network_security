@@ -13,7 +13,7 @@ Status was active at first.But something went wrong with my VM . i have download
 My note:
 UFW wasn’t running by default, so I had to enable it.
 
-
+![alt text](image.png)
 
 2) Allow SSH before enabling
 Command:

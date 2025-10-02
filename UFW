@@ -15,6 +15,8 @@ UFW wasn’t running by default, so I had to enable it.
 
 ![alt text](image.png)
 
+![alt text](image-1.png)
+
 2) Allow SSH before enabling
 Command:
 
@@ -27,6 +29,7 @@ Skipping adding existing rule (v6)
 My note:
 SSH was already allowed, so UFW skipped adding duplicates. This is important to make sure I don’t lock myself out when enabling UFW.
 
+![alt text](image-2.png)
 
 
 3) Check open ports
@@ -38,6 +41,7 @@ Services like DNS (53), DHCP (68), Avahi/MDNS (5353), and CUPS (631) were listen
 My note:
 This shows which services my VM has open. SSH wasn’t listed because it wasn’t running at that moment.
 
+![alt text](image-3.png)
 
 
 4) Enable UFW
@@ -64,7 +68,7 @@ Status changed to active.
 My note:
 Now the firewall is running and ready to filter traffic.
 
-
+![alt text](image-4.png)
 
 6) Allow web server ports
 Command:
@@ -78,7 +82,9 @@ Rules were added for HTTP (80) and HTTPS (443).
 My note:
 These are the ports needed for web servers, so I allowed them.
 
+![alt text](image-5.png)
 
+![alt text](image-6.png)
 
 7) Check verbose status
 Command:
@@ -96,7 +102,7 @@ Rules showed SSH, HTTP, HTTPS allowed
 My note:
 Verbose status is more detailed, showing both defaults and my rules.
 
-
+![alt text](image-7.png)
 
 8) Block a specific IP
 Command:
@@ -109,7 +115,7 @@ Rule added to deny traffic from that IP.
 My note:
 This blocks traffic from a malicious or untrusted IP address.
 
-
+![alt text](image-8.png)
 
 9) Allow a specific IP on port 587
 Command:
@@ -122,7 +128,7 @@ Rule added to allow that host.
 My note:
 Port 587 is used for sending email (SMTP submission). This command allows only one host to use that port.
 
-
+![alt text](image-9.png)
 
 10) Check rules again
 Command:
@@ -135,7 +141,7 @@ Rules listed for SSH (22), HTTP (80), HTTPS (443), deny 10.0.0.0, and allow 192.
 My note:
 This confirmed that all the rules I added are in place.
 
-
+![alt text](image-10.png)
 
 Part II: Enable UFW Logging
 1) Enable logging
@@ -148,7 +154,7 @@ Logging was enabled.
 
 My note:
 This makes UFW record allowed and blocked packets.
-
+![alt text](image-11.png)
 
 
 2) Set logging level
@@ -161,7 +167,7 @@ Logging set to high.
 
 My note:
 High logging shows more packet details so I can see what’s happening.
-
+![alt text](image-12.png)
 
 3) View recent logs
 Command:
@@ -174,7 +180,7 @@ Mostly [UFW AUDIT] and [UFW ALLOW] entries for DNS (53) and Avahi (5353).
 My note:
 This shows normal background network activity. Nothing suspicious.
 
-
+![alt text](image-13.png)
 
 4) Check for denied traffic
 Command:
@@ -187,7 +193,7 @@ No DENY results.
 My note:
 That makes sense — nothing tried to connect on blocked ports yet.
 
-
+![alt text](7.png)
 5) Check for allowed traffic
 Command:
 
@@ -198,3 +204,4 @@ Several [UFW ALLOW] entries for DNS and multicast traffic.
 
 My note:
 This confirms that UFW is letting normal traffic through.
+![alt text](7.png)

@@ -29,12 +29,16 @@ sudo ufw allow 22/tcp
 
 
 Output:
+
 Skipping adding existing rule
 Skipping adding existing rule (v6)
+
 My note:
 
 SSH was already allowed, so UFW skipped adding duplicates. This is important to make sure I don’t lock myself out when enabling UFW.
 
+
+Question:
 
 If you are remotely accessing your server, why is it important to allow traffic through port 22 before enabling UFW?
 
@@ -258,6 +262,8 @@ That makes sense — nothing tried to connect on blocked ports yet.
 ![alt text](7.png)
 
 
+
+Question:
 
 Is there any output for DENY? Why or why not?
 

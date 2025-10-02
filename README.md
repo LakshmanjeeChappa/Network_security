@@ -6,4 +6,5 @@ This is my Network Security Home Lab repo. I’m using it to practice on an Ubun
 
 📑 Table of Contents
 ==> [Assignment 4 – Exploring Ubuntu Home Lab](./exploring-ubuntu-home-lab.md)
-==? [Assignment 5 – UFW Firewall Configuration](./UFW.md)
+
+==> [Assignment 5 – UFW Firewall Configuration](./UFW.md)

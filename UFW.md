@@ -29,7 +29,7 @@ Skipping adding existing rule (v6)
 My note:
 SSH was already allowed, so UFW skipped adding duplicates. This is important to make sure I don’t lock myself out when enabling UFW.
 
-![]](image-2.png)
+![](image-2.png)
 
 
 3) Check open ports

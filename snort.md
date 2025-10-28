@@ -48,7 +48,7 @@ Command:
 sudo nano /etc/snort/snort.conf
 
 <img width="851" height="447" alt="3 1" src="https://github.com/user-attachments/assets/5953b3d7-8ae9-4c66-bb5d-e314406dfaca" />
-
+![alt text](3.png)
 What I changed:
 
 

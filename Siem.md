@@ -1,6 +1,23 @@
 **INTRO**
 
-n this lab I deployed a complete lightweight SIEM pipeline using Suricata for intrusion detection, Promtail for log forwarding, Loki for log storage, and LogCLI for querying. The goal was to observe network security events, generate alerts, forward them into a centralized log system, and analyze them. This setup helped demonstrate how SOC teams collect, index, and correlate security logs in real environments.
+In this lab I deployed a complete lightweight SIEM pipeline using Suricata for intrusion detection, Promtail for log forwarding, Loki for log storage, and LogCLI for querying. The goal was to observe network security events, generate alerts, forward them into a centralized log system, and analyze them. This setup helped demonstrate how SOC teams collect, index, and correlate security logs in real environments.
+
+
+Suricata
+
+Suricata watches network traffic in real time and detects anything suspicious. It creates detailed JSON logs and alerts that the rest of the pipeline can analyze.
+
+Loki
+
+Loki stores all the logs in a fast, searchable way without needing heavy indexing. It basically acts as the central place where all Suricata logs end up.
+
+Promtail
+
+Promtail reads log files from the system and ships them to Loki. It also adds labels so the logs are easier to search and filter later.
+
+LogCLI
+
+LogCLI is a command-line tool used to query and view logs stored in Loki. It lets me quickly check alerts, filter logs, and verify that everything is working
 
 
 
@@ -186,28 +203,13 @@ This confirms the YAML file is valid and Suricata can start without errors.
 
 Explain the flags
 -T
-
-What I saw:
-Runs a test mode — no real traffic, just config validation.
-
-My note:
-Used to make sure the config has no mistakes.
+Runs a test mode — no real traffic, just config validation.Used to make sure the config has no mistakes.
 
 -c
-
-What I saw:
-Loads the specific config file (suricata.yaml).
-
-My note:
-Points Suricata to the right configuration.
+Loads the specific config file (suricata.yaml).Points Suricata to the right configuration.
 
 -v
-
-What I saw:
-More detailed messages printed on screen.
-
-My note:
-Shows what Suricata is doing, so I can catch problems.
+More detailed messages printed on screen.Shows what Suricata is doing, so I can catch problems.
 
 
 Command:
@@ -278,7 +280,7 @@ My note:
 
 Loki runs as user ID 10001 inside the container, so fixing permissions is required or the container will fail to start.
 
-Command (Run Loki):
+Command:
 sudo docker run -d --name loki -p 3100:3100 \
 -v /etc/loki:/etc/loki \
 -v /var/lib/loki:/var/lib/loki \
@@ -289,7 +291,7 @@ What I saw:
 
 A container ID was returned, meaning Loki started.
 
-Command (Check Loki):
+Command:
 docker ps
 
 What I saw:
@@ -297,7 +299,7 @@ What I saw:
 The Loki container was running.
 Status showed “Up”, and port 3100 was exposed.
 
-Command (Check ready status):
+Command:
 curl -s http://localhost:3100/ready; echo
 <img width="878" height="341" alt="part3 5(main of main)" src="https://github.com/user-attachments/assets/176c5165-5c06-4de4-bcab-755f51aab245" />
 
@@ -315,8 +317,7 @@ My note:
 
 This means Loki fully started and is ready to accept logs.
 
-Question2
-Answer:
+Question2 Answer:
 
 Port: Loki exposes port 3100.
 
@@ -339,7 +340,7 @@ My note:
 
 Promtail needs these folders for its config file and for storing its “positions” bookmark.
 
-Command (Create Promtail config file):
+Command:
 sudo nano /etc/promtail/promtail-config.yml
 <img width="872" height="507" alt="part4 1" src="https://github.com/user-attachments/assets/00bb73da-3120-4d97-98c8-887923bebe50" />
 
@@ -351,7 +352,7 @@ My note:
 
 This config tells Promtail which file to read (Suricata’s eve.json), where to send logs (Loki), and which labels to attach.
 
-Command (Run Promtail):
+Command:
 sudo docker run -d --name promtail -p 9080:9080 \
 -v /etc/promtail:/etc/promtail \
 -v /var/log/suricata:/var/log/suricata:ro \
@@ -402,7 +403,7 @@ My note:
 
 This proves that Promtail is successfully sending Suricata logs into Loki.
 
-Command (Query Suricata logs):
+Command:
 logcli query --addr=http://localhost:3100 --limit=10 '{job="suricata"}'
 <img width="881" height="307" alt="part5 2" src="https://github.com/user-attachments/assets/b20d6a14-d619-4d34-b86c-a172dafb0cae" />
 
@@ -423,7 +424,7 @@ job="suricata"
 
 filename="/var/log/suricata/eve.json"
 
-host (your machine name)
+host (machine name)
 
 stream (standard Loki log stream label)
 
@@ -462,7 +463,7 @@ My note:
 
 Restarting Suricata is required so the new rule becomes active.
 
-Command (Query alerts in Loki):
+Command:
 logcli query --addr=http://localhost:3100 --limit=50 '{job="suricata"} |= "event_type\":\"alert\"" | json | line_format "{{.alert.signature}}"'
 <img width="877" height="401" alt="part6" src="https://github.com/user-attachments/assets/a19e7de0-305a-4a96-964a-0f8e7ff6b8db" />
 
@@ -503,7 +504,7 @@ The command pulled all Suricata alerts from the last 5 minutes.
 It printed only the source IP addresses, then sorted and counted how many times each IP appeared.
 The output showed the IPs with the highest alert count at the top.
 
-My note (what the command is doing):
+My note:
 
 This command basically takes a big pile of raw logs and turns it into a small list of “top talkers.”
 Instead of reading every alert, I can instantly see:
@@ -681,3 +682,11 @@ This cleanup removed all the old Loki and Promtail images and cleared unused Doc
 **SUMMARY**
 This lab walked through deploying a functional SIEM pipeline and testing it end-to-end. I installed Suricata to detect traffic, used Promtail to ship logs, stored and indexed them in Loki, and analyzed them through LogCLI. I created and triggered custom alerts, verified they reached the SIEM, and performed correlation queries. The lab demonstrated how detection, forwarding, storage, and analysis fit together in real security operations.
 
+
+
+
+
+
+
+**There is a change in username in first part. because while i was running part vm software got crashed and i reinstalled and created new virtual mnachine
+**

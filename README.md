@@ -11,3 +11,5 @@ This is my Network Security Home Lab repo. I’m using it to practice on an Ubun
 ==> [Assignment 5 – UFW Firewall Configuration](./UFW.md)
 
 ==> [Assignment 6 – installing and configuring Snort](./snort.md)
+
+==> [Assignment 9 – Building a Lightweight SIEM and IDPS with Suricata, Loki, Promtail and LogCLI](./Siem.md)
